@@ -3,6 +3,7 @@ let app = express();
 const bodyparse = require('body-parser');
 const getReposByUsername = require('../helpers/github.js');
 const structureData = require('../helpers/structureData.js');
+const db = require('../database/index.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyparse());
@@ -13,9 +14,11 @@ app.post('/repos', function (req, res) {
 
   getReposByUsername.getReposByUsername(req.body.handle)
     .then((data) => {
-      //console.log('then goes here', data);
       const structuredData = structureData.structureData(data.data);
-      res.send(structuredData);
+      return structuredData;
+    })
+    .then((data) => {
+      db.save(data);
     })
     .catch((err) => {
       res.status(500);

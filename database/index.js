@@ -5,6 +5,7 @@ let repoSchema = mongoose.Schema({
   id: Number,
   name: String,
   description: String,
+  url: String,
   owner: {
     id: Number,
     name: String,
@@ -15,10 +16,17 @@ let repoSchema = mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (/* TODO */) => {
+let save = (data) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
+  Repo.insertMany(data, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+  });
 }
 
 module.exports.save = save;

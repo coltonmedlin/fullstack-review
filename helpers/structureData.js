@@ -4,6 +4,7 @@ module.exports.structureData = (data) => {
     let result = {
       id: item.id,
       name: item.name,
+      url: item.html_url,
       description: item.description,
       owner: {
         id: item.owner.id,
