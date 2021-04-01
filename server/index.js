@@ -18,7 +18,10 @@ app.post('/repos', function (req, res) {
       return structuredData;
     })
     .then((data) => {
-      db.save(data);
+      return db.save(data);
+    })
+    .then(() => {
+      console.log('success!');
     })
     .catch((err) => {
       res.status(500);
@@ -30,8 +33,14 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
-  // TODO - your code here!
-  // This route should send back the top 25 repos
+  db.fetchTopTwentyFive()
+    .then((queryResult) => {
+      res.send(queryResult);
+    })
+    .catch((err) => {
+      res.status(500);
+      res.send(err);
+    });
 });
 
 let port = 1128;
