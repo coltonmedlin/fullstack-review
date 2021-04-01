@@ -9,7 +9,6 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyparse());
 
 app.post('/repos', function (req, res) {
-  // TODO - your code here!
   console.log('POST TO /repos');
 
   getReposByUsername.getReposByUsername(req.body.handle)
@@ -21,15 +20,16 @@ app.post('/repos', function (req, res) {
       return db.save(data);
     })
     .then(() => {
-      console.log('success!');
+      return db.fetchTopTwentyFive();
+    })
+    .then((queryResult) => {
+      res.send(queryResult);
     })
     .catch((err) => {
       res.status(500);
       res.send(err);
     });
-  // This route should take the github username provided
-  // and get the repo information from the github API, then
-  // save the repo information in the database
+
 });
 
 app.get('/repos', function (req, res) {
