@@ -12,7 +12,7 @@ const RepoList = (props) => (
     return(
     <tr>
       <td>
-      #{num} <a href={repo.url}>{repo.name}</a>
+      <a href={repo.url}>{repo.name}</a>
       </td>
       <td>
       <p>{repo.description}</p>
