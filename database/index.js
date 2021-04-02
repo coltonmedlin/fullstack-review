@@ -18,15 +18,16 @@ const Repo = mongoose.model('Repo', repoSchema);
 
 const save = (data) => {
   return new Promise((resolve, reject) => {
-    data.forEach((item) => {
+    data.forEach((item, index, array) => {
      Repo.updateOne({id: item.id}, item, {upsert: true}, (err, result) => {
        if (err) {
          console.log('error', err);
-       } else {
          reject(err);
        }
-     });
-     resolve(true);
+       if (index === array.length - 1) {
+         resolve(true);
+       }
+      });
     });
   });
 };
