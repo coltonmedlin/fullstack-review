@@ -12,16 +12,11 @@
       width: 100px;
       border-radius: 50%;
     }
-    table {
-    counter-reset: rowNumber;
+
+    tr {
+      margin-bottom: .5em;
     }
-    table tr::before {
-    display: table-cell;
-    counter-increment: rowNumber;
-    content: counter(rowNumber) ".";
-    padding-right: 0.3em;
-    text-align: right;
-    }
+
     td {
       max-width: 300px;
       padding-right: 20px;

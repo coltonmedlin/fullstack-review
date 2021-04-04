@@ -1,5 +1,6 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
+mongoose.connect(process.env.DBROUTE);
 
 const repoSchema = mongoose.Schema({
   id: {type: Number, unique: true},

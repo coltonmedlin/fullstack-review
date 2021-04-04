@@ -7,12 +7,12 @@ const RepoList = (props) => (
     <h4> TOP REPOS (by stars)</h4>
     <div>
       <table>
-    {props.repos.map((repo) => {
+    {props.repos.map((repo, index) => {
       num++;
     return(
     <tr>
       <td>
-      <a href={repo.url}>{repo.name}</a>
+      #{index + 1}: <a href={repo.url} target="blank">{repo.name}</a>
       </td>
       <td>
       <p>{repo.description}</p>
